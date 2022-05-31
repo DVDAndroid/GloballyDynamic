@@ -37,6 +37,7 @@ jobs:
 
   android_lint:
     name: Run Android lib lint
+    if: ${{ false }}
     runs-on: ubuntu-latest
     container: fabernovel/android:api-29-v1.1.0
     steps:
