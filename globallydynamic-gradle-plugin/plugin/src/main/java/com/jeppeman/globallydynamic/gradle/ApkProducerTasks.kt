@@ -3,6 +3,7 @@ package com.jeppeman.globallydynamic.gradle
 import com.android.build.gradle.api.ApplicationVariant
 import com.android.build.gradle.internal.errors.DeprecationReporterImpl
 import com.android.build.gradle.internal.errors.SyncIssueReporterImpl
+import com.android.build.gradle.internal.lint.LintFromMaven
 import com.android.build.gradle.internal.res.Aapt2FromMaven
 import com.android.build.gradle.internal.scope.ProjectInfo
 import com.android.build.gradle.internal.services.Aapt2Input
@@ -257,7 +258,8 @@ private fun createProjectServices(project: Project): ProjectServices {
             projectOptions = projectOptions,
             buildServiceRegistry = project.gradle.sharedServices,
             maxWorkerCount = project.gradle.startParameter.maxWorkerCount,
-            aapt2FromMaven = Aapt2FromMaven.create(project, projectOptions)
+            aapt2FromMaven = Aapt2FromMaven.create(project, projectOptions),
+            lintFromMaven = LintFromMaven.from(project, projectOptions, syncIssueReporter),
     ) { o: Any -> project.file(o) }
 }
 
